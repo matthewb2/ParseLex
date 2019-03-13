@@ -74,7 +74,7 @@ namespace ParserLex
     {
         public string text;
         public int pos;
-
+        public string current_char;
         public Token current_token;
 
 
@@ -82,7 +82,10 @@ namespace ParserLex
         {
             this.pos = 0;
             this.text = text;
-            
+            this.current_char = this.text.Substring(this.pos, 1);
+            this.current_token = new Token();
+
+
         }
 
         public void error()
@@ -90,8 +93,42 @@ namespace ParserLex
             Console.WriteLine("Error parsing input");
         }
 
+        public void advance()
+        {
+            this.pos += 1;
+            Token token = new Token();
+            if (this.pos > text.Length - 1)
+            {
+                this.current_char = null;
+                
+            }
+            else
+            {
+                this.current_char = this.text.Substring(this.pos, 1);
+            }
+        }
+        public void skip_whitespace()
+        {
+            while (this.current_char != null && string.IsNullOrWhiteSpace(this.current_char))
+            {
+                this.advance();
+            }
+        }
 
+        public string integer()
+        {
+            string result = "";
+            
+            while (this.current_char != null && Regex.IsMatch(this.current_char, @"^\d+$"))
+            {
+                result += this.current_char;
+                //Console.WriteLine(result);
+                this.advance();
+                
+            }
 
+            return result;
+        }
 
         public Token get_next_token()
         {
@@ -101,50 +138,40 @@ namespace ParserLex
             */
 
             Token token = new Token();
+                      
 
-            string text = this.text;
+            //Console.WriteLine(this.pos);
+            //Console.WriteLine(this.current_char);
 
-            /* is self.pos index past the end of the self.text ?
-            #if so, then return EOF token because there is no more
-            # input left to convert into tokens
-            */
+            while (this.current_char!=null) {
+               // Console.WriteLine(this.pos);
+                if (string.IsNullOrWhiteSpace(this.current_char))
+                {
+                    this.skip_whitespace();
+                    continue;
+                } else if (Regex.IsMatch(this.current_char, @"^\d{1}$"))
+                {
 
-            if (this.pos > text.Length - 1)
-            {
-                token = new Token("EOF",null);
-                return token; 
+                    token = new Token("INTEGER", this.integer());
+                  
+
+                    return token;
+                }
+                else if (this.current_char.Contains('+'))
+                {
+                    this.advance();
+                    token = new Token("PLUS", this.current_char);
+
+                    return token;
+                } else if (this.current_char.Contains('-'))
+                {
+                    this.advance();
+
+                    token = new Token("MINUS", this.current_char);
+                    return token;
+                }
+                else error();
             }
-            /*
-            # get a character at the position self.pos and decide
-            # what token to create based on the single character
-            */
-            string current_char = this.text.Substring(this.pos, 1);
-
-            /*
-            #if the character is a digit then convert it to
-            # integer, create an INTEGER token, increment self.pos
-            # index to point to the next character after the digit,
-            # and return the INTEGER token
-            */
-
-            if (Regex.IsMatch(current_char, @"^\d{1}$"))
-            {
-
-                token = new Token("INTEGER", Convert.ToInt32(current_char));
-                this.pos += 1;
-
-                return token;
-            }
-            else if (current_char.Contains('+'))
-            {
-
-                token = new Token("PLUS", current_char);
-
-                this.pos += 1;
-                return token;
-            }
-            else error();
-
             return token;
            
         }
@@ -171,16 +198,36 @@ namespace ParserLex
 
 
             Token left = this.current_token;
+            //Console.WriteLine(left.value);
             this.eat("INTEGER");
 
 
             Token op = this.current_token;
-            this.eat("PLUS");
+
+            if (op.type == "PLUS")
+            {
+                this.eat("PLUS");
+            } else  {
+                this.eat("MINUS");
+            }
 
             Token right = this.current_token;
-            this.eat("INTEGER");
-            int result = Convert.ToInt32(left.value) + Convert.ToInt32(right.value);
+            //Console.WriteLine(right.value);
 
+
+            this.eat("INTEGER");
+
+            int result;
+            if (op.type == "PLUS") {
+                
+                result = Convert.ToInt32(left.value) + Convert.ToInt32(right.value);
+
+            }
+            else {
+                result = Convert.ToInt32(left.value) - Convert.ToInt32(right.value);
+
+            }
+           
             return result;
         
         }
