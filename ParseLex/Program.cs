@@ -170,6 +170,18 @@ namespace ParserLex
                     token = new Token("DIV", "/");
                     return token;
                 }
+                else if (this.current_char.Contains('+'))
+                {
+                    this.advance();
+                    token = new Token("PLUS", "+");
+                    return token;
+                }
+                else if (this.current_char.Contains('-'))
+                {
+                    this.advance();
+                    token = new Token("MINUS", "-");
+                    return token;
+                }
                 else error();
             }
             return token;
@@ -218,7 +230,7 @@ namespace ParserLex
             return Convert.ToInt32(token.value);
         }
 
-        public int expr()
+        public int term()
         {
             //this.current_token = this.lexer.get_next_token();
 
@@ -237,6 +249,33 @@ namespace ParserLex
                 {
                     eat("DIV");
                     result = result / factor();
+                }
+            }
+
+
+            return result;
+
+        }
+
+        public int expr()
+        {
+            //this.current_token = this.lexer.get_next_token();
+
+            int result = term();
+
+            while (current_token.type == "PLUS" || current_token.type == "MINUS")
+            {
+
+                Token token = current_token;
+                if (token.type == "PLUS")
+                {
+                    eat("PLUS");
+                    result = result + term();
+                }
+                else if (token.type == "MINUS")
+                {
+                    eat("MINUS");
+                    result = result - term();
                 }
             }
 
