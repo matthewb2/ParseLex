@@ -15,7 +15,8 @@ namespace ParserLex
             Console.WriteLine("calc> ");
             string text = Console.ReadLine();
 
-            Interpreter interpreter = new Interpreter(text);
+            Lexer lexer = new Lexer(text);
+            Interpreter interpreter = new Interpreter(lexer);
             //Console.WriteLine(text);
 
             int result = interpreter.expr();
@@ -49,13 +50,13 @@ namespace ParserLex
         }
 
 
-        string __str__() {
+        public string __str__() {
         
         return String.Format("Token({0}, {1})", this.type, this.value);
         
         }
 
-        string __repr__() {
+        public string __repr__() {
 
             return this.__str__();
 
@@ -70,7 +71,7 @@ namespace ParserLex
 
 
 
-    public class Interpreter
+    public class Lexer
     {
         public string text;
         public int pos;
@@ -78,7 +79,7 @@ namespace ParserLex
         public Token current_token;
 
 
-        public Interpreter(string text)
+        public Lexer(string text)
         {
             this.pos = 0;
             this.text = text;
@@ -100,7 +101,7 @@ namespace ParserLex
             if (this.pos > text.Length - 1)
             {
                 this.current_char = null;
-                
+
             }
             else
             {
@@ -118,13 +119,13 @@ namespace ParserLex
         public string integer()
         {
             string result = "";
-            
+
             while (this.current_char != null && Regex.IsMatch(this.current_char, @"^\d+$"))
             {
                 result += this.current_char;
                 //Console.WriteLine(result);
                 this.advance();
-                
+
             }
 
             return result;
@@ -138,13 +139,13 @@ namespace ParserLex
             */
 
             Token token = new Token();
-                      
+
 
             //Console.WriteLine(this.pos);
             //Console.WriteLine(this.current_char);
 
-            while (this.current_char!=null) {
-               // Console.WriteLine(this.pos);
+            while (this.current_char != null) {
+                // Console.WriteLine(this.pos);
                 if (string.IsNullOrWhiteSpace(this.current_char))
                 {
                     this.skip_whitespace();
@@ -153,27 +154,41 @@ namespace ParserLex
                 {
 
                     token = new Token("INTEGER", this.integer());
-                  
+
 
                     return token;
                 }
-                else if (this.current_char.Contains('+'))
+                else if (this.current_char.Contains('*'))
                 {
                     this.advance();
-                    token = new Token("PLUS", this.current_char);
-
+                    token = new Token("MUL", "*");
                     return token;
-                } else if (this.current_char.Contains('-'))
+                }
+                else if (this.current_char.Contains('/'))
                 {
                     this.advance();
-
-                    token = new Token("MINUS", this.current_char);
+                    token = new Token("DIV", "/");
                     return token;
                 }
                 else error();
             }
             return token;
-           
+
+        }
+    }
+    public class Interpreter
+    {
+        Lexer lexer;
+        Token current_token;
+
+        public Interpreter(Lexer lexer)
+        {
+            this.lexer = lexer;
+            this.current_token = this.lexer.get_next_token();
+        }
+        public void error()
+        {
+
         }
         /*#########################################################
         # Parser / Interpreter code                              #
@@ -187,46 +202,47 @@ namespace ParserLex
             */
             if (this.current_token.type == token_type)
             {
-                this.current_token = this.get_next_token();
+                this.current_token = this.lexer.get_next_token();
             }
             else error();
 
             
         }
 
-        public int term()
+        public int factor()
         {
 
             Token token = this.current_token;
             eat("INTEGER");
+            // Console.WriteLine(token.__repr__());
             return Convert.ToInt32(token.value);
         }
 
         public int expr()
         {
-            this.current_token = this.get_next_token();
+            //this.current_token = this.lexer.get_next_token();
 
-            int result = term();
+            int result = factor();
 
-            while(current_token.type == "PLUS" || current_token.type == "MINUS")
+            while (current_token.type == "MUL" || current_token.type == "DIV")
             {
 
                 Token token = current_token;
-                if (token.type == "PLUS")
+                if (token.type == "MUL")
                 {
-                    this.eat("PLUS");
-                    result = result + term();
+                    eat("MUL");
+                    result = result * factor();
                 }
-                else
+                else if (token.type == "DIV")
                 {
-                    this.eat("MINUS");
-                    result = result - term();
+                    eat("DIV");
+                    result = result / factor();
                 }
             }
 
-           
+
             return result;
-        
+
         }
 
     }
