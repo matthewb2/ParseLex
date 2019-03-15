@@ -35,7 +35,7 @@ namespace ParserLex
         public Token()
         {
         }
-            public Token(string type, string value)
+        public Token(string type, string value)
         {
 
             this.type = type;
@@ -50,13 +50,15 @@ namespace ParserLex
         }
 
 
-        public string __str__() {
-        
-        return String.Format("Token({0}, {1})", this.type, this.value);
-        
+        public string __str__()
+        {
+
+            return String.Format("Token({0}, {1})", this.type, this.value);
+
         }
 
-        public string __repr__() {
+        public string __repr__()
+        {
 
             return this.__str__();
 
@@ -110,7 +112,7 @@ namespace ParserLex
         }
         public void skip_whitespace()
         {
-            while (this.current_char != null && string.IsNullOrWhiteSpace(this.current_char))
+            while (this.current_char != null && string.IsNullOrEmpty(this.current_char))
             {
                 this.advance();
             }
@@ -144,13 +146,15 @@ namespace ParserLex
             //Console.WriteLine(this.pos);
             //Console.WriteLine(this.current_char);
 
-            while (this.current_char != null) {
+            while (this.current_char != null)
+            {
                 // Console.WriteLine(this.pos);
-                if (string.IsNullOrWhiteSpace(this.current_char))
+                if (string.IsNullOrEmpty(this.current_char))
                 {
                     this.skip_whitespace();
                     continue;
-                } else if (Regex.IsMatch(this.current_char, @"^\d{1}$"))
+                }
+                else if (Regex.IsMatch(this.current_char, @"^\d{1}$"))
                 {
 
                     token = new Token("INTEGER", this.integer());
@@ -180,6 +184,18 @@ namespace ParserLex
                 {
                     this.advance();
                     token = new Token("MINUS", "-");
+                    return token;
+                }
+                else if (this.current_char.Contains('('))
+                {
+                    this.advance();
+                    token = new Token("LPAREN", "(");
+                    return token;
+                }
+                else if (this.current_char.Contains(')'))
+                {
+                    this.advance();
+                    token = new Token("RPAREN", ")");
                     return token;
                 }
                 else error();
@@ -218,16 +234,31 @@ namespace ParserLex
             }
             else error();
 
-            
+
         }
 
         public int factor()
         {
+            //factor : INTEGER | LPAREN expr RPAREN"""
 
-            Token token = this.current_token;
-            eat("INTEGER");
-            // Console.WriteLine(token.__repr__());
-            return Convert.ToInt32(token.value);
+            Token token;
+            int result;
+
+            token = this.current_token;
+
+            if (token.type == "INTEGER")
+            {
+                eat("INTEGER");
+                return Convert.ToInt32(token.value);
+            }
+            else if (token.type == "LPAREN")
+            {
+                eat("LPAREN");
+                result = expr();
+                eat("RPAREN");
+                return result;
+            }
+            return 0;
         }
 
         public int term()
