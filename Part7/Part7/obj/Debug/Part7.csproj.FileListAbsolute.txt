@@ -1,0 +1,6 @@
+C:\Users\Administrator\source\repos\Part7\Part7\bin\Debug\Part7.exe.config
+C:\Users\Administrator\source\repos\Part7\Part7\bin\Debug\Part7.exe
+C:\Users\Administrator\source\repos\Part7\Part7\bin\Debug\Part7.pdb
+C:\Users\Administrator\source\repos\Part7\Part7\obj\Debug\Part7.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\Part7\Part7\obj\Debug\Part7.exe
+C:\Users\Administrator\source\repos\Part7\Part7\obj\Debug\Part7.pdb
