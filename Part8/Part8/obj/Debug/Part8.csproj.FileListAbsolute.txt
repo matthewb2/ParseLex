@@ -1,0 +1,6 @@
+C:\Users\Administrator\source\repos\Part8\Part8\bin\Debug\Part8.exe.config
+C:\Users\Administrator\source\repos\Part8\Part8\bin\Debug\Part8.exe
+C:\Users\Administrator\source\repos\Part8\Part8\bin\Debug\Part8.pdb
+C:\Users\Administrator\source\repos\Part8\Part8\obj\Debug\Part8.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\source\repos\Part8\Part8\obj\Debug\Part8.exe
+C:\Users\Administrator\source\repos\Part8\Part8\obj\Debug\Part8.pdb
