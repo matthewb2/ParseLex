@@ -1,0 +1,26 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(499,5): warning MSB8004: Output 디렉터리가 슬래시로 끝나지 않습니다. Output 디렉터리의 적절한 평가를 허용하는 데 필요하므로 이 빌드 인스턴스에서 슬래시를 추가합니다.
+  eval.cpp
+C:\Users\bests\Downloads\Z-Sharp-master\ZSharp\eval.cpp(53,14): warning C4244: '인수': 'float'에서 'const unsigned __int64'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\bests\Downloads\Z-Sharp-master\ZSharp\eval.cpp(55,20): warning C4244: '인수': 'float'에서 'const unsigned __int64'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\bests\Downloads\Z-Sharp-master\ZSharp\eval.cpp(60,27): warning C4244: '인수': 'float'에서 'const unsigned __int64'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\bests\Downloads\Z-Sharp-master\ZSharp\eval.cpp(67,50): warning C4244: '인수': 'float'에서 'const unsigned __int64'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\bests\Downloads\Z-Sharp-master\ZSharp\eval.cpp(67,64): warning C4244: '인수': 'float'에서 'const unsigned __int64'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\bests\Downloads\Z-Sharp-master\ZSharp\eval.cpp(69,16): warning C4244: '인수': 'float'에서 'const unsigned __int64'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\bests\Downloads\Z-Sharp-master\ZSharp\eval.cpp(79,26): warning C4244: '인수': 'float'에서 'const unsigned __int64'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\bests\Downloads\Z-Sharp-master\ZSharp\eval.cpp(79,17): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\bests\Downloads\Z-Sharp-master\ZSharp\eval.cpp(83,33): warning C4244: '인수': 'float'에서 'const unsigned __int64'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\bests\Downloads\Z-Sharp-master\ZSharp\eval.cpp(94,19): warning C4244: '인수': 'float'에서 'const unsigned __int64'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\bests\Downloads\Z-Sharp-master\ZSharp\eval.cpp(116,15): warning C4244: '인수': 'float'에서 'const unsigned __int64'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\bests\Downloads\Z-Sharp-master\ZSharp\eval.cpp(116,47): warning C4244: '인수': 'float'에서 'const unsigned __int64'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\bests\Downloads\Z-Sharp-master\ZSharp\eval.cpp(116,69): warning C4244: '인수': 'float'에서 'const unsigned __int64'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\bests\Downloads\Z-Sharp-master\ZSharp\eval.cpp(116,91): warning C4244: '인수': 'float'에서 'const unsigned __int64'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\bests\Downloads\Z-Sharp-master\ZSharp\eval.cpp(116,113): warning C4244: '인수': 'float'에서 'const unsigned __int64'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\bests\Downloads\Z-Sharp-master\ZSharp\eval.cpp(116,135): warning C4244: '인수': 'float'에서 'const unsigned __int64'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\bests\Downloads\Z-Sharp-master\ZSharp\eval.cpp(116,157): warning C4244: '인수': 'float'에서 'const unsigned __int64'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\bests\Downloads\Z-Sharp-master\ZSharp\eval.cpp(116,179): warning C4244: '인수': 'float'에서 'const unsigned __int64'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\bests\Downloads\Z-Sharp-master\ZSharp\eval.cpp(123,71): warning C4244: '인수': 'float'에서 'const unsigned __int64'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\bests\Downloads\Z-Sharp-master\ZSharp\eval.cpp(136,21): warning C4244: '인수': 'float'에서 'const unsigned __int64'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Main.cpp
+C:\Users\bests\Downloads\Z-Sharp-master\ZSharp\graphics.h(19,10): fatal error C1083: 포함 파일을 열 수 없습니다. 'SDL2/SDL_ttf.h': No such file or directory
+  strops.cpp
+  코드를 생성하고 있습니다...
